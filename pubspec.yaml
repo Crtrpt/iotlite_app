@@ -1,7 +1,7 @@
 name: iotlite
 description: Simple and easy to use IoT app
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 
 version: 1.0.0+1
 
@@ -18,11 +18,8 @@ dependencies:
   flutter_dotenv: any
   path_provider: ^1.3.0
   crypto: ^2.1.5
-
   json_annotation: any
   mqtt_client: any
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
 
 dev_dependencies:
