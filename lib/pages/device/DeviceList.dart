@@ -5,7 +5,18 @@ class DeviceList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('First Screen'),
+        title: Text('设备列表'),
+        actions: [
+          PopupMenuButton<int>(
+            onSelected: (idx) => {Navigator.pushNamed(context, "/device/new")},
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<int>>[
+              const PopupMenuItem<int>(
+                value: 1,
+                child: Text('增加设备'),
+              )
+            ],
+          )
+        ],
       ),
       body: Center(
         child: ElevatedButton(

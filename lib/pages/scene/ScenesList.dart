@@ -5,16 +5,30 @@ class ScenesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('场景列表'),
+        actions: [
+          PopupMenuButton<int>(
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<int>>[
+              const PopupMenuItem<int>(
+                value: 1,
+                child: Text('增加场景'),
+              )
+            ],
+          )
+        ],
       ),
-      body: Center(
-        child: ElevatedButton(
-          child: Text('场景列表'),
-          onPressed: () {
-            // Navigate to the second screen when tapped.
-          },
+      body: Column(children: [
+        ListTile(
+          title: Text('工厂'),
         ),
-      ),
+        ListTile(
+          title: Text('农场'),
+        ),
+        ListTile(
+          title: Text('智能家居'),
+        ),
+      ]),
     );
   }
 }
