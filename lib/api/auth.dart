@@ -1,8 +1,8 @@
-import 'package:iotlite/api/Response.dart';
+import 'package:iotlite/api/request.dart';
 
 class auth {
-  static Future<Response> postLogin(ctx) async {
-    return Future.value(new Response());
+  static Future postLogin(ctx) async {
+    return Request.get("/auth/login", ctx);
   }
 
   static Future postSign(ctx) async {

@@ -28,19 +28,29 @@ class _LoginState extends State<Login> {
   login() {
     var account = accountContrller.value.text;
     var password = passwordController.value.text;
-    auth.postLogin({"account": account, "password": password}).then((value) => {
-          if (value.code == 0)
-            {}
-          else
-            {
+    auth
+        .postLogin({"account": account, "password": password})
+        .then((value) => {
+              if (value.code == 0)
+                {}
+              else
+                {
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            title: Text("提示"),
+                            content: Text(value.msg),
+                          ))
+                }
+            })
+        .catchError((e) => {
               showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
                         title: Text("提示"),
-                        content: Text(value.msg),
+                        content: Text("网络繁忙请稍后重试"),
                       ))
-            }
-        });
+            });
   }
 
   @override
