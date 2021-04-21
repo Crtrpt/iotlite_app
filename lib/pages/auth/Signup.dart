@@ -40,12 +40,18 @@ class _SignupState extends State<Signup> {
               labelText: '账号',
             ),
           ),
+          SizedBox(
+            height: 20,
+          ),
           TextField(
             controller: emailController,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: '邮箱',
             ),
+          ),
+          SizedBox(
+            height: 20,
           ),
           TextField(
             controller: passwordController,
@@ -55,8 +61,8 @@ class _SignupState extends State<Signup> {
               labelText: '密码',
             ),
           ),
-          RaisedButton(onPressed: signup, child: Text("注册")),
-          RaisedButton(
+          ElevatedButton(onPressed: signup, child: Text("注册")),
+          ElevatedButton(
               onPressed: () => {Navigator.pop(context)}, child: Text("返回登录")),
         ],
       ),

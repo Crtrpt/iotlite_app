@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class UserCenter extends StatelessWidget {
+class DeviceWifi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('用户中心'),
+        title: Text('设备配网'),
       ),
       body: Center(
         child: ElevatedButton(
-          child: Text('用户中心'),
+          child: Text('设备配网'),
           onPressed: () {
             // Navigate to the second screen when tapped.
           },

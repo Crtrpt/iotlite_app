@@ -54,12 +54,21 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               labelText: '邮箱',
             ),
           ),
-          RaisedButton(onPressed: () => verifEmail, child: Text("获取验证码")),
+          SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(onPressed: () => verifEmail, child: Text("获取验证码")),
+          SizedBox(
+            height: 20,
+          ),
           TextField(
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: '验证码',
             ),
+          ),
+          SizedBox(
+            height: 20,
           ),
           TextField(
             obscureText: true,
@@ -68,8 +77,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               labelText: '密码',
             ),
           ),
-          RaisedButton(onPressed: find, child: Text("确认")),
-          RaisedButton(
+          ElevatedButton(onPressed: find, child: Text("确认")),
+          ElevatedButton(
               onPressed: () => {Navigator.pop(context)}, child: Text("返回登录")),
         ],
       ),

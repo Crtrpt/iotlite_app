@@ -34,12 +34,17 @@ class _HomeState extends State<Home> {
           ),
         ),
         ListTile(
-          title: Text('设置'),
+          title: Text('用户设置'),
           onTap: () {
-            // Update the state of the app
-            // ...
-            // Then close the drawer
             Navigator.pop(context);
+            Navigator.pushNamed(context, "/user/center");
+          },
+        ),
+        ListTile(
+          title: Text('系统设置'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, "/system/setting");
           },
         ),
         ListTile(
@@ -55,39 +60,27 @@ class _HomeState extends State<Home> {
         title: Text('首页'),
         actions: [
           PopupMenuButton<int>(
+            onSelected: (i) => {
+              if (i == 1)
+                {Navigator.pushNamed(context, "/tool/wifi")}
+              else if (i == 2)
+                {Navigator.pushNamed(context, "/tool/scan")}
+            },
             itemBuilder: (BuildContext context) => <PopupMenuEntry<int>>[
               const PopupMenuItem<int>(
-                value: 0,
-                child: Text('增加场景'),
-              ),
-              const PopupMenuItem<int>(
                 value: 1,
-                child: Text('增加产品'),
-              ),
-              const PopupMenuItem<int>(
-                value: 2,
                 child: Text('设备配网'),
               ),
               const PopupMenuItem<int>(
-                value: 3,
+                value: 2,
                 child: Text('扫一扫'),
               ),
             ],
           )
         ],
       ),
-      body: ListView(
-        children: <Widget>[
-          ListTile(
-            title: Text('Map'),
-          ),
-          ListTile(
-            title: Text('Album'),
-          ),
-          ListTile(
-            title: Text('Phone'),
-          ),
-        ],
+      body: Column(
+        children: [Text("设备发现"), Text("设备告警")],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,

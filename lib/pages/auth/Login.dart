@@ -69,6 +69,9 @@ class _LoginState extends State<Login> {
               labelText: '账号',
             ),
           ),
+          SizedBox(
+            height: 5,
+          ),
           TextField(
             controller: passwordController,
             obscureText: true,
@@ -77,11 +80,11 @@ class _LoginState extends State<Login> {
               labelText: '密码',
             ),
           ),
-          RaisedButton(onPressed: login, child: Text("登录")),
-          RaisedButton(
+          ElevatedButton(onPressed: login, child: Text("登录")),
+          ElevatedButton(
               onPressed: () => {Navigator.pushNamed(context, "/signup")},
               child: Text("注册")),
-          RaisedButton(
+          ElevatedButton(
               onPressed: () => {Navigator.pushNamed(context, "/forget")},
               child: Text("找回密码"))
         ],

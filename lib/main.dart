@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:iotlite/pages/auth/Signup.dart';
 import 'package:iotlite/pages/device/DeviceDetail.dart';
+import 'package:iotlite/pages/system/SystemSetting.dart';
+import 'package:iotlite/pages/tool/DeviceScan.dart';
+import 'package:iotlite/pages/tool/DeviceWifi.dart';
 
 import 'pages/Home.dart';
 import 'pages/auth/Forgetpassword.dart';
@@ -21,6 +25,14 @@ void main() {
 class IotLite extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.blue,
+      systemNavigationBarColor: Colors.blue,
+      systemNavigationBarDividerColor: Colors.blue,
+      systemNavigationBarIconBrightness: Brightness.light,
+    ));
+
+    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     return MaterialApp(
       title: 'IotLite',
       theme: ThemeData(
@@ -43,6 +55,9 @@ class IotLite extends StatelessWidget {
         "/device/detail": (context) => DeviceDetail(),
         "/device/new": (context) => DeviceNew(),
         "/user/center": (context) => UserCenter(),
+        "/system/setting": (context) => SystemSetting(),
+        "/tool/scan": (context) => DeviceScan(),
+        "/tool/wifi": (context) => DeviceWifi(),
       },
     );
   }
