@@ -3,6 +3,7 @@ import 'package:iotlite/pages/auth/Signup.dart';
 import 'package:iotlite/pages/device/DeviceDetail.dart';
 
 import 'pages/Home.dart';
+import 'pages/auth/Forgetpassword.dart';
 import 'pages/auth/Login.dart';
 import 'pages/device/DeviceList.dart';
 import 'pages/device/DeviceNew.dart';
@@ -31,6 +32,7 @@ class IotLite extends StatelessWidget {
         '/': (context) => Home(),
         "/login": (context) => Login(),
         "/signup": (context) => Signup(),
+        "/forget": (context) => ForgetPassword(),
         "/scenes": (context) => ScenesList(),
         "/scenes/detail": (context) => ScenesDetail(),
         "/scenes/new": (context) => ScenesNew(),
