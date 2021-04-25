@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:iotlite/api/auth.dart';
+import 'package:iotlite/entity/auth.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -12,13 +14,13 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController accountContrller = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
+
+  late Future<Box<Auth>> authStorage;
+
   @override
   void initState() {
+    authStorage = Hive.openBox<Auth>('userBox');
     super.initState();
-    print("初始化");
-    accountContrller.addListener(() {
-      print("这是什么？？？");
-    });
   }
 
   @override
@@ -31,6 +33,7 @@ class _LoginState extends State<Login> {
   login() {
     var account = accountContrller.value.text;
     var password = passwordController.value.text;
+    Auth authvar;
     auth
         .postLogin({
           "account": account,
@@ -38,7 +41,14 @@ class _LoginState extends State<Login> {
         })
         .then((value) => {
               if (value["code"] == 0)
-                {Navigator.pushNamed(context, "/")}
+                {
+                  authvar = new Auth(),
+                  authvar.token = value["data"]["token"],
+                  authvar.user.name = value["data"]["user"]['name'],
+                  print(authvar),
+                  authStorage.then((value) => value.put("auth", authvar)),
+                  Navigator.pushNamed(context, "/")
+                }
               else
                 {
                   showDialog(
@@ -50,6 +60,7 @@ class _LoginState extends State<Login> {
                 }
             })
         .catchError((e) => {
+              print(e.toString()),
               showDialog(
                   context: context,
                   builder: (context) => AlertDialog(

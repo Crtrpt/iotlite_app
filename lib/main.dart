@@ -6,6 +6,7 @@ import 'package:iotlite/pages/system/SystemSetting.dart';
 import 'package:iotlite/pages/tool/DeviceScan.dart';
 import 'package:iotlite/pages/tool/DeviceWifi.dart';
 
+import 'boot/initHive.dart';
 import 'pages/Home.dart';
 import 'pages/auth/Forgetpassword.dart';
 import 'pages/auth/Login.dart';
@@ -19,6 +20,8 @@ import 'pages/scene/ScenesNew.dart';
 import 'pages/user/UserCenter.dart';
 
 void main() {
+  //初始化hive
+  InitHive();
   runApp(IotLite());
 }
 

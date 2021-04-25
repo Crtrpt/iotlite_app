@@ -10,10 +10,10 @@ class auth {
   }
 
   static Future postVerifEmail(ctx) async {
-    return Request.post("/auth/verifEmail", ctx);
+    return Request.post("/auth/confirmEmail", ctx);
   }
 
   static Future postfind(ctx) async {
-    return Request.post("/auth/find", ctx);
+    return Request.post("/auth/resetpassword", ctx);
   }
 }
