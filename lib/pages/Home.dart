@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
           title: Text('退出'),
           onTap: () {
             Navigator.pop(context);
-            Navigator.pushNamed(context, "/login");
+            Navigator.pushNamedAndRemoveUntil(context, "/login", (r) => false);
           },
         ),
       ])),
