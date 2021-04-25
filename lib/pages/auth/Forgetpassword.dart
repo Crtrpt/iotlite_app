@@ -8,7 +8,7 @@ class ForgetPassword extends StatefulWidget {
 
 class _ForgetPasswordState extends State<ForgetPassword> {
   TextEditingController accountContrller = new TextEditingController();
-  TextEditingController passwordController = new TextEditingController();
+  TextEditingController codeController = new TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -21,21 +21,19 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   @override
   void dispose() {
     accountContrller.dispose();
-    passwordController.dispose();
+    codeController.dispose();
     super.dispose();
   }
 
   verifEmail() {
-    var account = accountContrller.value.text;
-    var password = passwordController.value.text;
-    auth.postLogin({"account": account, "password": password}).then(
-        (value) => {print("返回结果")});
+    var email = accountContrller.value.text;
+    auth.postVerifEmail({"email": email}).then((value) => {print("返回结果")});
   }
 
   find() {
-    var account = accountContrller.value.text;
-    var password = passwordController.value.text;
-    auth.postLogin({"account": account, "password": password}).then(
+    var email = accountContrller.value.text;
+    var code = codeController.value.text;
+    auth.postfind({"email": email, "code": code}).then(
         (value) => {if (value.code == 0) {}});
   }
 

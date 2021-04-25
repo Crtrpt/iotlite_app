@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:iotlite/api/auth.dart';
 
@@ -29,17 +32,20 @@ class _LoginState extends State<Login> {
     var account = accountContrller.value.text;
     var password = passwordController.value.text;
     auth
-        .postLogin({"account": account, "password": password})
+        .postLogin({
+          "account": account,
+          "password": sha256.convert(utf8.encode(password)).toString()
+        })
         .then((value) => {
-              if (value.code == 0)
-                {}
+              if (value["code"] == 0)
+                {Navigator.pushNamed(context, "/")}
               else
                 {
                   showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
                             title: Text("提示"),
-                            content: Text(value.msg),
+                            content: Text(value['msg']),
                           ))
                 }
             })

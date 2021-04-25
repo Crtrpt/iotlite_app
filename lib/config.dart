@@ -1,1 +1,1 @@
-var config = {"host": "http://127.0.0.1"};
+var config = {"host": "http://192.168.1.5:4201"};
