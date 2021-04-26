@@ -5,6 +5,7 @@ class DeviceList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text('设备列表'),
         actions: [
           PopupMenuButton<int>(

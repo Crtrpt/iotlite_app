@@ -5,6 +5,7 @@ class ScenesDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text('场景列表'),
       ),
       body: Center(

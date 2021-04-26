@@ -5,6 +5,7 @@ class UserCenter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         centerTitle: true,
         title: Text('用户中心'),
       ),

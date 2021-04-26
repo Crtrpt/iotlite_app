@@ -5,6 +5,7 @@ class DeviceDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text(' 设备详情'),
       ),
       body: Center(

@@ -5,6 +5,7 @@ class ScenesNew extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text('创建新场景'),
       ),
       body: Stack(children: [

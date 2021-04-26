@@ -10,10 +10,6 @@ class TcpServer extends StatefulWidget {
 
 class _TcpServernState extends State<TcpServer> with SingleTickerProviderStateMixin {
   var config = new Map();
-  final List<Tab> myTabs = <Tab>[
-    Tab(text: '日志'),
-    Tab(text: '客户端列表'),
-  ];
 
   late TabController _tabController;
 
@@ -32,7 +28,7 @@ class _TcpServernState extends State<TcpServer> with SingleTickerProviderStateMi
     });
     config["host"] = "0.0.0.0";
     config["port"] = "5555";
-    _tabController = TabController(vsync: this, length: myTabs.length);
+    _tabController = TabController(vsync: this, length: 2);
     hostController = TextEditingController(text: config["host"]);
     portController = TextEditingController(text: config["port"]);
   }
@@ -71,9 +67,14 @@ class _TcpServernState extends State<TcpServer> with SingleTickerProviderStateMi
       start();
     } else {
       print("关闭服务器");
-      serverCtx.close();
-      serverCtx = null;
-      clientlist = [];
+
+      closeAll();
+
+      setState(() {
+        serverCtx = null;
+        clientlist = [];
+        loglist = [];
+      });
     }
   }
 
@@ -81,28 +82,35 @@ class _TcpServernState extends State<TcpServer> with SingleTickerProviderStateMi
     print("启动服务器 ${config['host']} ${config['port']}");
     Future<ServerSocket> serverFuture = ServerSocket.bind(config["host"], int.parse(config["port"]));
     serverFuture.then((ServerSocket server) {
-      serverCtx = server;
+      setState(() {
+        serverCtx = server;
+      });
       server.listen((Socket socket) {
         print("收到的数据 ${socket.remoteAddress.address} ${socket.remotePort}");
-        clientlist.add({
+        var list = [];
+        list.add({
           "host": socket.remoteAddress.address.toString(),
           'port': socket.remotePort,
           "socket": socket,
+          "connect": true,
           "time": DateFormat('yyyy-MM-dd  kk:mm:ss').format(DateTime.now()).toString(),
         });
+        list.addAll(clientlist);
         setState(() {
-          clientlist = clientlist;
+          clientlist = list;
         });
         socket.listen((List<int> data) {
-          loglist.add({
+          var list = [];
+          list.add({
             "host": socket.remoteAddress.address.toString(),
             'port': socket.remotePort.toString(),
             "content": data.toString(),
             "time": DateFormat('yyyy-MM-dd kk:mm:ss').format(DateTime.now()).toString(),
           });
+          list.addAll(loglist);
           print(loglist);
           setState(() {
-            loglist = loglist;
+            loglist = list;
           });
           socket.write(data);
           print(data);
@@ -116,17 +124,28 @@ class _TcpServernState extends State<TcpServer> with SingleTickerProviderStateMi
     _tabController.dispose();
     hostController.dispose();
     portController.dispose();
-    serverCtx.close();
+    closeAll();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {this.toggleServer()},
+        backgroundColor: serverCtx == null ? Colors.red : Colors.green,
+        child: Text(serverCtx == null ? "启动" : "关闭"),
+      ),
       appBar: AppBar(
-        title: Text('IP:${config["localIp"]}'),
+        elevation: 0,
+        title: Text('IP:${config["localIp"]}:${config["port"]}'),
         actions: [
-          IconButton(icon: Icon(Icons.data_usage), onPressed: () => {toggleServer()}),
+          IconButton(
+              icon: Icon(
+                Icons.adjust,
+                color: serverCtx == null ? Colors.red : Colors.green,
+              ),
+              onPressed: () => {toggleServer()}),
           PopupMenuButton<int>(
             onSelected: (i) => _itemSelected(i),
             itemBuilder: (BuildContext context) => <PopupMenuEntry<int>>[
@@ -147,43 +166,42 @@ class _TcpServernState extends State<TcpServer> with SingleTickerProviderStateMi
         ],
         bottom: TabBar(
           controller: _tabController,
-          tabs: myTabs,
+          tabs: <Tab>[
+            Tab(text: '日志(${loglist.length})'),
+            Tab(text: '客户端(${clientlist.length})'),
+          ],
         ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: myTabs.map((Tab tab) {
-          if (tab.text == '日志') {
-            print(loglist.length);
-            return Center(
-              child: ListView.builder(
-                  itemCount: loglist.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                      title: Text(loglist[index]['content']),
-                      subtitle: Text(clientlist[index]['time'] + " " + clientlist[index]['host'] + " " + clientlist[index]['port'].toString()),
-                    );
-                  }),
-            );
-          } else {
-            print(clientlist.length);
-            return Center(
-              child: ListView.builder(
-                  itemCount: clientlist.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                      onTap: () => {
-                        //TODO 判断是否连接状态
-                        clientlist[index]['socket'].close(),
-                      },
-                      title: Text(clientlist[index]['host'] + " " + clientlist[index]['port'].toString()),
-                      subtitle: Text(clientlist[index]['time']),
-                    );
-                  }),
-            );
-          }
-        }).toList(),
-      ),
+      body: TabBarView(controller: _tabController, children: [
+        Center(
+          child: ListView.builder(
+              itemCount: loglist.length,
+              itemBuilder: (BuildContext context, int index) {
+                print(index);
+                return ListTile(
+                  title: Text(loglist[index]['content']),
+                  subtitle: Text(loglist[index]['host'] + ":" + loglist[index]['port'].toString() + " " + loglist[index]['time']),
+                );
+              }),
+        ),
+        Center(
+          child: ListView.builder(
+              itemCount: clientlist.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  onTap: () => {
+                    //TODO 判断是否连接状态
+                    clientlist[index]["connect"] = false,
+                    clientlist[index]['socket'].close(),
+                    this.setState(() {}),
+                  },
+                  tileColor: clientlist[index]["connect"] ? Colors.green : Colors.red,
+                  title: Text(clientlist[index]['host'] + " " + clientlist[index]['port'].toString()),
+                  subtitle: Text(clientlist[index]['time']),
+                );
+              }),
+        ),
+      ]),
     );
   }
 
@@ -221,8 +239,9 @@ class _TcpServernState extends State<TcpServer> with SingleTickerProviderStateMi
                     FlatButton(
                       child: Text('保存'),
                       onPressed: () {
-                        config.putIfAbsent("host", () => hostController.value.text);
-                        config.putIfAbsent("port", () => portController.value.text);
+                        config["host"] = hostController.value.text;
+                        config["port"] = portController.value.text;
+                        closeAll();
                         start();
                         Navigator.of(context).pop();
                       },
@@ -250,5 +269,14 @@ class _TcpServernState extends State<TcpServer> with SingleTickerProviderStateMi
         });
         break;
     }
+  }
+
+  void closeAll() {
+    this.clientlist.forEach((s) {
+      s['socket'].close();
+    });
+    clientlist = [];
+    this.serverCtx.close();
+    serverCtx = null;
   }
 }

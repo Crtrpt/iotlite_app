@@ -5,6 +5,7 @@ class DeviceNew extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text('创建新设备'),
       ),
       body: Center(

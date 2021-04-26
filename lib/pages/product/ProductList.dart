@@ -5,6 +5,7 @@ class ProductList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text('产品列表'),
         actions: [
           PopupMenuButton<int>(

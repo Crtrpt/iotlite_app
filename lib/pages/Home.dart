@@ -70,15 +70,13 @@ class _HomeState extends State<Home> {
         ),
       ])),
       appBar: AppBar(
+        elevation: 0,
         centerTitle: true,
         title: Text('首页'),
         actions: [
           PopupMenuButton<int>(
             onSelected: (i) => {
-              if (i == 1)
-                {Navigator.pushNamed(context, "/tool/wifi")}
-              else if (i == 2)
-                {Navigator.pushNamed(context, "/tool/scan")}
+              if (i == 1) {Navigator.pushNamed(context, "/tool/wifi")} else if (i == 2) {Navigator.pushNamed(context, "/tool/scan")}
             },
             itemBuilder: (BuildContext context) => <PopupMenuEntry<int>>[
               const PopupMenuItem<int>(

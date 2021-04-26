@@ -5,6 +5,7 @@ class SystemSetting extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          elevation: 0,
           centerTitle: true,
           title: Text('系统设置'),
         ),
