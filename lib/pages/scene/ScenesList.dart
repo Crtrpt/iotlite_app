@@ -6,9 +6,10 @@ class ScenesList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('场景列表'),
+        title: Text('场景'),
         actions: [
           PopupMenuButton<int>(
+            onSelected: (idx) => {Navigator.pushNamed(context, "/scenes/new")},
             itemBuilder: (BuildContext context) => <PopupMenuEntry<int>>[
               const PopupMenuItem<int>(
                 value: 1,

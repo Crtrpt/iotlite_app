@@ -15,18 +15,28 @@ class Tools extends StatelessWidget {
                 crossAxisSpacing: 2.0,
                 childAspectRatio: 1.0),
             children: [
-              Text('Tcp服务器'),
-              Text('Tcp客户端'),
-              Text('Tcp服务器'),
-              Text('Tcp客户端'),
-              Text('MqttBroker'),
-              Text('Mqtt客户端'),
-              Text('Http服务器'),
-              Text('http客户端'),
-              Text('COAPBroker'),
-              Text('coap客户端'),
-              Text('wifi配网'),
-              Text('扫一扫'),
+              InkWell(
+                  child: Text('Tcp服务器'),
+                  onTap: () =>
+                      {Navigator.pushNamed(context, "/tool/tcpserver")}),
+              InkWell(
+                  child: Text('Tcp客户端'),
+                  onTap: () =>
+                      {Navigator.pushNamed(context, "/tool/tcpserver")}),
+              InkWell(
+                  child: Text('udp服务器'),
+                  onTap: () =>
+                      {Navigator.pushNamed(context, "/tool/udpserver")}),
+              InkWell(
+                  child: Text('udp客户端'),
+                  onTap: () =>
+                      {Navigator.pushNamed(context, "/tool/udpclient")}),
+              InkWell(
+                  child: Text('Wifi配网'),
+                  onTap: () => {Navigator.pushNamed(context, "/tool/wifi")}),
+              InkWell(
+                  child: Text('扫一扫'),
+                  onTap: () => {Navigator.pushNamed(context, "/tool/scan")}),
             ]));
   }
 }

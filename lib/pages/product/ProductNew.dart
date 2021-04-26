@@ -1,20 +1,48 @@
 import 'package:flutter/material.dart';
 
 class ProductNew extends StatelessWidget {
+  TextEditingController nameTextEditingController = new TextEditingController();
+  TextEditingController descTextEditingController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('创建新产品'),
       ),
-      body: Center(
-        child: ElevatedButton(
-          child: Text('场景列表'),
-          onPressed: () {
-            // Navigate to the second screen when tapped.
-          },
-        ),
-      ),
+      body: Stack(children: [
+        ListView(
+          padding: EdgeInsets.all(10),
+          children: [
+            // SizedBox(
+            //   height: 300,
+            // ),
+            TextField(
+              controller: nameTextEditingController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: '名称',
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            TextField(
+              controller: descTextEditingController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: '描述',
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(onPressed: save, child: Text("保存")),
+          ],
+        )
+      ]),
     );
   }
+
+  void save() {}
 }
