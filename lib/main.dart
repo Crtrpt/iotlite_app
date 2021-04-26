@@ -5,6 +5,7 @@ import 'package:iotlite/pages/device/DeviceDetail.dart';
 import 'package:iotlite/pages/system/SystemSetting.dart';
 import 'package:iotlite/pages/tool/DeviceScan.dart';
 import 'package:iotlite/pages/tool/DeviceWifi.dart';
+import 'package:iotlite/pages/tool/Tools.dart';
 
 import 'boot/initHive.dart';
 import 'pages/Home.dart';
@@ -17,6 +18,10 @@ import 'pages/product/ProductNew.dart';
 import 'pages/scene/ScenesDetail.dart';
 import 'pages/scene/ScenesList.dart';
 import 'pages/scene/ScenesNew.dart';
+import 'pages/tool/TcpClient.dart';
+import 'pages/tool/TcpServer.dart';
+import 'pages/tool/UdpClient.dart';
+import 'pages/tool/UdpServer.dart';
 import 'pages/user/UserCenter.dart';
 
 void main() {
@@ -59,8 +64,13 @@ class IotLite extends StatelessWidget {
         "/device/new": (context) => DeviceNew(),
         "/user/center": (context) => UserCenter(),
         "/system/setting": (context) => SystemSetting(),
+        "/tools": (context) => Tools(),
         "/tool/scan": (context) => DeviceScan(),
         "/tool/wifi": (context) => DeviceWifi(),
+        "/tool/tcpserver": (context) => TcpServer(),
+        "/tool/tcpclient": (context) => TcpClient(),
+        "/tool/udpserver": (context) => UdpServer(),
+        "/tool/udpclient": (context) => UdpClient(),
       },
     );
   }

@@ -34,6 +34,13 @@ class _HomeState extends State<Home> {
           height: 200,
         ),
         ListTile(
+          title: Text('工具箱'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, "/tools");
+          },
+        ),
+        ListTile(
           title: Text('用户设置'),
           onTap: () {
             Navigator.pop(context);
