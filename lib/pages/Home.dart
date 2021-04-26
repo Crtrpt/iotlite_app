@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -27,11 +28,10 @@ class _HomeState extends State<Home> {
     return Scaffold(
       drawer: Drawer(
           child: ListView(padding: EdgeInsets.zero, children: <Widget>[
-        DrawerHeader(
-          child: Text('用户信息'),
-          decoration: BoxDecoration(
-            color: Colors.blue,
-          ),
+        SvgPicture.asset(
+          'images/draw_bg.svg',
+          fit: BoxFit.fill,
+          height: 200,
         ),
         ListTile(
           title: Text('用户设置'),
@@ -42,6 +42,13 @@ class _HomeState extends State<Home> {
         ),
         ListTile(
           title: Text('系统设置'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, "/system/setting");
+          },
+        ),
+        ListTile(
+          title: Text('关于我们'),
           onTap: () {
             Navigator.pop(context);
             Navigator.pushNamed(context, "/system/setting");

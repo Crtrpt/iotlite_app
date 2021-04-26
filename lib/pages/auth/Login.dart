@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 import 'package:iotlite/api/auth.dart';
 import 'package:iotlite/entity/auth.dart';
@@ -73,39 +74,47 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        padding: EdgeInsets.all(10),
-        children: [
-          SizedBox(
-            height: 200,
-          ),
-          TextField(
-            controller: accountContrller,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: '账号',
+        body: Stack(
+      children: [
+        SvgPicture.asset(
+          'images/bg.svg',
+          height: MediaQuery.of(context).size.height,
+          fit: BoxFit.cover,
+        ),
+        ListView(
+          padding: EdgeInsets.all(10),
+          children: [
+            SizedBox(
+              height: 300,
             ),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          TextField(
-            controller: passwordController,
-            obscureText: true,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: '密码',
+            TextField(
+              controller: accountContrller,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: '账号',
+              ),
             ),
-          ),
-          ElevatedButton(onPressed: login, child: Text("登录")),
-          ElevatedButton(
-              onPressed: () => {Navigator.pushNamed(context, "/signup")},
-              child: Text("注册")),
-          ElevatedButton(
-              onPressed: () => {Navigator.pushNamed(context, "/forget")},
-              child: Text("找回密码"))
-        ],
-      ),
-    );
+            SizedBox(
+              height: 5,
+            ),
+            TextField(
+              controller: passwordController,
+              obscureText: true,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: '密码',
+              ),
+            ),
+            ElevatedButton(onPressed: login, child: Text("登录")),
+            ElevatedButton(
+                onPressed: () => {Navigator.pushNamed(context, "/signup")},
+                child: Text("注册")),
+            ElevatedButton(
+                onPressed: () => {Navigator.pushNamed(context, "/forget")},
+                child: Text("找回密码"))
+          ],
+        ),
+      ],
+    ));
   }
 }
