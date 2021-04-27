@@ -10,14 +10,14 @@ class PageList extends StatefulWidget {
 
   final Function builder;
 
-  PageList({required String this.path, String? this.data, required Function this.builder});
+  PageList({required String this.path, dynamic? this.data, required Function this.builder});
 
   @override
   _PageListState createState() => _PageListState(path: this.path, data: this.data, builder: this.builder);
 }
 
 class _PageListState extends State<PageList> {
-  var list = ["222", "222", "333", "444", "555", "666"];
+  var list = ["222", "222", "333", "444", "555", "666", "777", "888", '999'];
 
   var _scrollController = ScrollController();
 
@@ -29,7 +29,7 @@ class _PageListState extends State<PageList> {
 
   Function builder;
 
-  _PageListState({required String this.path, String? this.data, required Function this.builder});
+  _PageListState({required String this.path, dynamic? this.data, required Function this.builder});
 
   @override
   void initState() {
@@ -68,7 +68,7 @@ class _PageListState extends State<PageList> {
               return Row(
                 children: [
                   Container(
-                    padding: EdgeInsets.fromLTRB(0, 100, 100, 0),
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                     child: builder(element),
                   )
                 ],

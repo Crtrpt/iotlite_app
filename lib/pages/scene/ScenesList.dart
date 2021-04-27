@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:iotlite/components/pagelist.dart';
 
-class ScenesList extends StatelessWidget {
+class ScenesList extends StatefulWidget {
+  @override
+  _ScenesListState createState() => _ScenesListState();
+}
+
+class _ScenesListState extends State<ScenesList> {
+  var query = {};
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,15 +28,24 @@ class ScenesList extends StatelessWidget {
         ],
       ),
       body: Column(children: [
-        ListTile(
-          title: Text('工厂'),
-        ),
-        ListTile(
-          title: Text('农场'),
-        ),
-        ListTile(
-          title: Text('智能家居'),
-        ),
+        Expanded(
+            child: Container(
+                padding: EdgeInsets.all(10),
+                child: PageList(
+                    path: "/product/list",
+                    data: {},
+                    builder: (e) {
+                      print(e);
+                      return Container(
+                          child: InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(context, "/scenes/detail", arguments: query);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.fromLTRB(0, 100, 100, 0),
+                                child: Text("e11"),
+                              )));
+                    })))
       ]),
     );
   }
