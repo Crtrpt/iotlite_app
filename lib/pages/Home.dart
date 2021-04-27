@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:iotlite/components/pagelist.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -19,6 +20,16 @@ class _HomeState extends State<Home> {
         Navigator.pushNamed(context, routeList[index]);
       }
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   String dropdownValue = 'One';
@@ -91,9 +102,19 @@ class _HomeState extends State<Home> {
           )
         ],
       ),
-      body: Column(
-        children: [Text("设备发现"), Text("设备告警")],
-      ),
+      body: Column(children: [
+        Text("头部组件"),
+        Expanded(
+            child: Container(
+                padding: EdgeInsets.all(10),
+                child: PageList(
+                    path: "111",
+                    data: "",
+                    builder: (e) {
+                      print(e);
+                      return Text(e);
+                    })))
+      ]),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
