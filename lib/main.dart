@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:iotlite/pages/auth/Signup.dart';
 import 'package:iotlite/pages/device/DeviceDetail.dart';
 import 'package:iotlite/pages/product/ProductDetail.dart';
@@ -34,14 +33,14 @@ void main() {
 class IotLite extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        // statusBarColor: Colors.transparent,
-        // systemNavigationBarColor: Colors.transparent,
-        // systemNavigationBarDividerColor: Colors.transparent,
-        // systemNavigationBarIconBrightness: Brightness.light,
-        ));
-
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    //     // statusBarColor: Colors.transparent,
+    //     // systemNavigationBarColor: Colors.transparent,
+    //     // systemNavigationBarDividerColor: Colors.transparent,
+    //     // systemNavigationBarIconBrightness: Brightness.light,
+    //     ));
+    //
+    // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     return MaterialApp(
       title: 'IotLite',
       theme: ThemeData(
