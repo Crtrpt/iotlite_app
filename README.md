@@ -1,3 +1,3 @@
 # iotlite
 
-iotlite app客户端
+本项目已经迁移到gitlab
